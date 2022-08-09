@@ -1,1 +1,9 @@
-更新一些平时学到的一些不会的零碎的知识。
+#更新一些平时学到的一些不会的零碎的知识。
+
+#Debug ReadSim软件（一款用来模拟三代测序reads数据的软件）
+根据官网https://sourceforge.net/projects/readsim/的安装说明，重新安装了软件。
+1.安装软件后再次跑软件，还是存在error信息。
+2.比较了软件自带的例子中的参考基因组和我们自己的参考基因组后发现，他们的.fna文件只有一个序列，而我们的参考基因组文件为seq文件，
+里面包含很多Scaffold（基因组de novo测序，通过reads拼接获得Contigs后，往往还需要构建454 Paired-end库或Illumina Mate-pair库，
+以获得一定大小片段（如3Kb、6Kb、10Kb、20Kb）两端的序列。基于这些序列，可以确定一些Contig之间的顺序关系，这些先后顺序已知的Contigs组成Scaffold。）
+3.留下一个scaffold后重新跑，发现没有error信息，并且输出的reads结果中也没有了对应的错误。
