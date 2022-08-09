@@ -1,7 +1,7 @@
 #更新一些平时学到的一些不会的零碎的知识。
 
 #Debug ReadSim软件（一款用来模拟三代测序reads数据的软件）
-根据官网https://sourceforge.net/projects/readsim/的安装说明，重新安装了软件。
+根据官网的安装说明，重新安装了软件。https://sourceforge.net/projects/readsim/
 1.安装软件后再次跑软件，还是存在error信息。
 2.比较了软件自带的例子中的参考基因组和我们自己的参考基因组后发现，他们的.fna文件只有一个序列，而我们的参考基因组文件为seq文件，
 里面包含很多Scaffold（基因组de novo测序，通过reads拼接获得Contigs后，往往还需要构建454 Paired-end库或Illumina Mate-pair库，
