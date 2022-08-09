@@ -1,0 +1,78 @@
+# encoding: utf-8
+'''
+@author:Huzunkai
+@name:2022.08.08 shell脚本制作.py
+@time: 08/08/2022 12:26
+@description:
+'''
+import re
+import os
+mid = [
+'GCA_000195955.2_ASM19595v2_genomic',
+'GCA_000277735.2_ASM27773v2_genomic',
+'GCA_001708265.1_ASM170826v1_genomic',
+'GCA_002072775.2_ASM207277v2_genomic',
+'GCA_002116795.1_ASM211679v1_genomic',
+'GCA_002116835.1_ASM211683v1_genomic',
+'GCA_009730215.1_ASM973021v1_genomic',
+'GCA_009730235.1_ASM973023v1_genomic',
+'GCA_014899365.1_ASM1489936v1_genomic',
+'GCA_014899465.1_ASM1489946v1_genomic',
+'GCA_014899705.1_ASM1489970v1_genomic',
+'GCA_014899965.1_ASM1489996v1_genomic',
+'GCA_014900005.1_ASM1490000v1_genomic',
+'GCA_014900135.1_ASM1490013v1_genomic',
+'GCA_014900215.1_ASM1490021v1_genomic',
+'GCA_014900235.1_ASM1490023v1_genomic',
+'GCA_014900255.1_ASM1490025v1_genomic',
+'GCA_014900275.1_ASM1490027v1_genomic',
+'GCA_014900295.1_ASM1490029v1_genomic',
+'GCA_014900355.1_ASM1490035v1_genomic',
+'GCA_014900435.1_ASM1490043v1_genomic',
+'GCA_014900555.1_ASM1490055v1_genomic',
+'GCA_014901035.1_ASM1490103v1_genomic',
+'GCA_014901135.1_ASM1490113v1_genomic',
+'GCA_014901155.1_ASM1490115v1_genomic',
+'GCA_017901035.1_ASM1790103v1_genomic',
+'GCA_017901095.1_ASM1790109v1_genomic',
+'GCA_021559895.1_ASM2155989v1_genomic',
+'GCA_022870345.1_ASM2287034v1_genomic',
+'GCA_022870365.1_ASM2287036v1_genomic'
+]
+file = open('C://Users//86187//Desktop//shell.sh','w')
+for index_name in mid:
+    str = f'mkdir mkdir /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}'
+    str0 = f'mkdir /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{index_name}'
+    str1 = '/public_yixue/software/fastp/v0.23.2/fastp ' \
+           f'-i /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/sim_reads_1000x/{index_name}.fq.gz ' \
+           '--max_len1 0 --length_required 50 -q 15 -u 40 --thread 4 ' \
+           f'--json /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.json ' \
+           f'--html /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.html ' \
+           f'-o /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.clean.fq.gz'
+
+    str2 = '/public_yixue/software/basic/miniconda3/envs/zhougang/bin/bowtie2 ' \
+           '--mm --very-sensitive ' \
+           '-x /data/Yixue/yuanlijuan/Tools/01.AMRpanelAnalyse-pipline/V.1.0/DB/Human.db/Iref_Adapter_Human_ntpara/Iref_Adapter_Human_ntpara ' \
+           f'-U /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.clean.fq.gz ' \
+           f'-p 8 --un-gz /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.nohost.fq.gz ' \
+           f'--al-gz /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.host.fq.gz ' \
+           '-S /dev/null  --no-unal --no-head -k 1 '
+
+    str3 = '/public_yixue/software/bwa/bwa-0.7.17/bwa ' \
+           'mem -t 4 -k 32 ' \
+           f'-M /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/01.geno/01.raw.reads_ref/{index_name}.fna.gz ' \
+           f'/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/01.QC/{index_name}/{index_name}.nohost.fq.gz ' \
+           f'> /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/GCA_000195955.2_ASM19595v2_genomic/{index_name}.sam'
+
+    str4 = 'perl /data/Yixue/hanpeng/01.Product_tech/MTBpanel/20220801/bwa_pip/Parser_sam.pl ' \
+           '--amplicon_region /data/Yixue/hanpeng/01.Product_tech/MTBpanel/20220801/50X/50X.amplicon.region.xls ' \
+           f'/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{index_name}/{index_name}.sam ' \
+           f'>/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{index_name}/{index_name}.xls ' \
+           f'2> /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{index_name}/{index_name}.stat'
+    file.writelines('%s\n' % str)
+    file.writelines('%s\n' % str0)
+    file.writelines('%s\n' % str1)
+    file.writelines('%s\n' % str2)
+    file.writelines('%s\n' % str3)
+    file.writelines('%s\n' % str4)
+
