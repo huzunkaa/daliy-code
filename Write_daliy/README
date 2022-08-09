@@ -13,4 +13,8 @@ awk '{if(NR%4 == 1){print ">" substr($0, 2)}}{if(NR%4 == 2){print}}' xx.fastq >x
 
 #三代测序reads的矫正软件isNOcorrect
 最近几天一直在调试这个软件，但是运行了感觉没变化。
-今天突发奇想，不知道是不是因为没有将reads转化为full_length的reads，打算将reads转化为全长读数在比较。
+今天突发奇想，不知道是不是因为没有将reads转化为full_length的reads，打算将reads转化为全长读数在比较。（貌似不行）
+发现了新的解决方法，貌似是重复运行两遍软件，将碱基质量变为+++在运行，貌似就可以了。但是不知道是否可以。
+
+分割文件按行
+$ split -l 1 run_task.sh run_task --additional-suffix=.sh
