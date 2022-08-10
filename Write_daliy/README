@@ -18,3 +18,11 @@ awk '{if(NR%4 == 1){print ">" substr($0, 2)}}{if(NR%4 == 2){print}}' xx.fastq >x
 
 分割文件按行
 $ split -l 1 run_task.sh run_task --additional-suffix=.sh
+
+最小生成树（血研所项目）
+一个连通图的生成树是一个极小的连通子图，包含全部的顶点，但是只构成一棵树，并且比顶点数少一条边
+
+血研所项目问题：
+1.为什么明明有95个样本，在01.mlst文件夹中，就变成了93个样本了。剩下的两个样本呢？kehu文件也只有93个样本，难到客户
+只做了93个样本吗？info文件是什么（里面包含了很多ST信息）？
+2.Tree文件夹里面的Core_Pan和Phylogeny有什么区别吗？
