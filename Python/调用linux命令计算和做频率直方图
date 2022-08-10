@@ -1,0 +1,76 @@
+# encoding: utf-8
+'''
+@author:Huzunkai
+@name:2022.08.10 处理xls文件以及统计分析和频率直方图.py
+@time: 08/10/2022 15:10
+@description:
+'''
+import re
+import os
+import sys
+count = 3
+
+while count:
+    try:
+        import xlrd
+        print('xlrd already')
+        break
+    except:
+        print('improt xlrd failed, will download xlrd')
+        os.system('pip install xlrd')
+        count -= 1
+        continue
+
+
+while count:
+    try:
+        import pandas as pd
+        print('pandas already')
+        break
+    except:
+        print('improt pandas failed, will download pandas')
+        os.system('pip install pandas')
+        count -= 1
+        continue
+
+count1 = 3
+while count1:
+    try:
+        import matplotlib.pyplot as plt
+        print('matplotlib already')
+        break
+    except:
+        print('will download matplotlib')
+        os.system('pip install matplotlib')
+        count1 -= 1
+        continue
+
+count2 = 3
+while count2:
+    try:
+        import seaborn as sns
+        print('seaborn already')
+        break
+    except:
+        print('will download seaborn')
+        os.system('pip install seaborn')
+        count2 -= 1
+        continue
+
+file_path = '/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect'
+path_name = os.listdir(file_path)
+for name in path_name:
+    os.system(f'rm /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild*')
+    os.system(f'grep -v Wild /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}.xls > /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild.xls')
+    os.system('%s %s %s'%("awk '{print $7}'",f'/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild.xls',f"> /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild-frq.xls"))
+    df = pd.read_table(f'/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild-frq.xls')
+    print(f'{name}')
+    print(df.mean()[0])
+    print(df.var()[0])
+    mean = df.mean()[0]
+    var = df.var()[0]
+    num = mean + 3*var
+    os.system(f'echo "mean+3var: {num}" > /data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}_no-Wild-stastic.xls')
+    plt.hist(df)
+    plt.savefig(f'/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/{name}/{name}.png')
+    plt.close()
