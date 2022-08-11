@@ -1,0 +1,15 @@
+R语言的函数代码等，日常记录。
+
+#频率分布图并加上阈值线
+setwd('C://Users/86187/Desktop/')
+file = read.table('GCA_000277735.2_ASM27773v2_genomic_no-Wild_100X+_frq.xls',header = TRUE)
+mean3var = mean(file$Var_Rate) + 3*var(file$Var_Rate)
+h = hist(file$Var_Rate)
+xfit = seq(min(file$Var_Rate),max(file$Var_Rate),0.1)
+meannum <- mean(file$Var_Rate,na.rm=TRUE)
+sdnum <- sd(file$Var_Rate,na.rm=TRUE)
+yfit <- dnorm(xfit,mean = meannum,sd=sdnum)
+yfit <- yfit*diff(h$mids[1:2]*length(file$Var_Rate))
+lines(xfit,yfit,col="red",lwd=0.5)
+abline(v = mean3var,col='blue')
+
