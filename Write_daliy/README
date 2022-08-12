@@ -26,3 +26,7 @@ $ split -l 1 run_task.sh run_task --additional-suffix=.sh
 1.为什么明明有95个样本，在01.mlst文件夹中，就变成了93个样本了。剩下的两个样本呢？kehu文件也只有93个样本，难到客户
 只做了93个样本吗？info文件是什么（里面包含了很多ST信息）？
 2.Tree文件夹里面的Core_Pan和Phylogeny有什么区别吗？
+
+
+三代测序模拟reads的错误问题
+发现深度越深，测得的假阳性的reads越多，但是变异频率越小。
