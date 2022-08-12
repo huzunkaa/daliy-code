@@ -13,3 +13,11 @@ yfit <- yfit*diff(h$mids[1:2]*length(file$Var_Rate))
 lines(xfit,yfit,col="red",lwd=0.5)
 abline(v = mean3var,col='blue')
 
+
+#分组箱线图
+df = read.table('zhexiantu.txt',header = T)
+library(ggplot2)
+df$type=factor(df$type,levels = c('50X','100X','150X','200X','250X','300X','350X','400X','450X','500X','550X','600X','650X','700X','750X','800X','850X','900X','950X','1000X'))
+ggplot(data = df, aes(x = type, y = value, fill = type)) +
+  geom_violin()+
+  geom_boxplot()+geom_jitter(binaxis = "y", position = position_jitter(0.2), stackdir = "center", dotsize = 0.4)+theme_bw()
