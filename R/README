@@ -21,3 +21,11 @@ df$type=factor(df$type,levels = c('50X','100X','150X','200X','250X','300X','350X
 ggplot(data = df, aes(x = type, y = value, fill = type)) +
   geom_violin()+
   geom_boxplot()+geom_jitter(binaxis = "y", position = position_jitter(0.2), stackdir = "center", dotsize = 0.4)+theme_bw()
+
+服务器R脚本
+> library(ggplot2)
+> df = read.table('/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect/Gradient_seq5_300-400X_small.xls',header = T)
+> df$name=factor(df$name,levels = c('305X','310X','315X','320X','325X','330X','335X','340X','345X','350X','355X','360X','365X','370X','375X','380X','385X','390X','395X'))
+> pic = ggplot(data = df, aes(x = name, y = value, fill = name)) + geom_violin() + geom_boxplot(outlier.colour = NA)+theme_bw()+ geom_hline(aes(yintercept=1),colour = '#990000',linetype='dashed')
+> setwd('/data/Yixue/huzunkai/develop/01.Product/01.MTB_panel/Cutoff/02.sim/out/02.Vardetect')
+> ggsave(pic,filename='pic4_300-400X_test.pdf',wid = 8,height = 6)
