@@ -30,3 +30,6 @@ $ split -l 1 run_task.sh run_task --additional-suffix=.sh
 
 三代测序模拟reads的错误问题
 发现深度越深，测得的假阳性的reads越多，但是变异频率越小。
+
+
+当使用qsub一次性投了多个任务时，可以使用qsub -u huzunkai任务删除huzunkai账户所有的任务。
