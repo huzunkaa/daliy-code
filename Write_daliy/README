@@ -32,4 +32,25 @@ $ split -l 1 run_task.sh run_task --additional-suffix=.sh
 发现深度越深，测得的假阳性的reads越多，但是变异频率越小。
 
 
+fasta.gz文件解压使用gunzip命令。
+
 当使用qsub一次性投了多个任务时，可以使用qsub -u huzunkai任务删除huzunkai账户所有的任务。
+
+python的pip太慢，在后面加-i https://pypi.tuna.tsinghua.edu.cn/simple。换源。
+
+#毒力基因分析（SRST2软件）
+conda create -n srst2 srst2(安装比较方便，唯一的缺点是没找到可以进行毒力基因分析的相对应的脚本)
+git clone https://github.com/katholt/srst2（最建议的还是直接在GitHub上下载zip文件，自己解压）
+pip install biopython（运行会显示没有Bio模块，其实是缺少了biopython模块
+
+运行python VFDBgenus.py --inflie VFDB_setB_nt.fas报错：
+mportError: Bio.Alphabet has been removed from Biopython. In many cases, 
+the alphabet can simply be ignored and removed from scripts. In a few cases, 
+you may need to specify the molecule_type as an annotation on a 
+SeqRecord for your script to work correctly. Please see 
+https://biopython.org/wiki/Alphabet for more information.
+其实是biopython的版本太新。使用pip uninstall卸载之后pip install biopython==1.76 -i https://pypi.tuna.tsinghua.edu.cn/simple重新安装即可。
+之后安装cd-hit软件（百度或者谷歌即可）
+注意，之后会因为python3出现问题，需要重新安装py2，并且按照biopython1.76版本才行。（转csv步骤）
+但是后续貌似输入文件有一些没看懂，在研究一下，发现好像能直接blast注释。
+
