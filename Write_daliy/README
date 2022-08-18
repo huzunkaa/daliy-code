@@ -54,3 +54,6 @@ https://biopython.org/wiki/Alphabet for more information.
 注意，之后会因为python3出现问题，需要重新安装py2，并且按照biopython1.76版本才行。（转csv步骤）
 但是后续貌似输入文件有一些没看懂，在研究一下，发现好像能直接blast注释。
 
+发现了一个做毒力基因很不错的软件：abricate，在base环境下，
+abricate --db vfdb --quiet no.102.contig > Pseudomonas_VF_abricate
+输入文件问contig就行。
