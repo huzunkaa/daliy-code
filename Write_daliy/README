@@ -58,3 +58,6 @@ https://biopython.org/wiki/Alphabet for more information.
 发现了一个做毒力基因很不错的软件：abricate，在base环境下，
 abricate --db vfdb --quiet no.102.contig > Pseudomonas_VF_abricate
 输入文件问contig就行。
+
+
+二代测序call SNP可以使用snippy软件，在snippy环境中。
