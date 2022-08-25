@@ -65,3 +65,6 @@ abricate --db vfdb --quiet no.102.contig > Pseudomonas_VF_abricate
 
 
 #PCT（降钙素原，procalcitonin）是一种蛋白质，当严重细菌、真菌、寄生虫感染以及脓毒症和多脏器功能衰竭时它在血浆中的水平升高。自身免疫、过敏和病毒感染时PCT不会升高。
+#C反应蛋白（英语：C-Reactive Protein，CRP） 是由肝脏生成的血浆蛋白，主要被当作发炎的指标。
+#WBC是血常规中的白细胞计数。
+#绝对嗜中性白血球数（ANC）是指白血球中的嗜中性白血球（neutrophil）之多形核白血球（segment）及带状白血球（band）的數量，可用來评估患者是否易有感染症狀產生。
