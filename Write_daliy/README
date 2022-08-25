@@ -62,3 +62,6 @@ abricate --db vfdb --quiet no.102.contig > Pseudomonas_VF_abricate
 
 二代测序call SNP可以使用snippy软件，在snippy环境中。
 这个软件可以自动call SNP并且准备进化树文件。
+
+
+#PCT（降钙素原，procalcitonin）是一种蛋白质，当严重细菌、真菌、寄生虫感染以及脓毒症和多脏器功能衰竭时它在血浆中的水平升高。自身免疫、过敏和病毒感染时PCT不会升高。
