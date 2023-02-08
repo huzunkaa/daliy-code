@@ -1,0 +1,150 @@
+from openpyxl import load_workbook
+wb = load_workbook(f"C://Users//86187//Desktop//结果肺克软件.xlsx")
+filew = open('C://Users//86187//Desktop//Paper_re.xls','w')
+sheet = wb["Sheet2"]
+num  = sheet.max_row
+data_pos = []
+data_neg = []
+data_stat = []
+numx = 0
+timer = 0
+###stat_paper###
+# for i in range(2,num+1):
+#     numx += 1
+#     data = []
+#     str = sheet[f'E{i}'].value
+#     data.append(sheet[f'F{i}'].value)
+#     data.append(sheet[f'L{i}'].value)
+#     data.append(sheet[f'R{i}'].value)
+#     # print(data)
+#     for ix in data:
+#         if ix != None:
+#             if ix != str:
+#                 data_stat.append(numx)
+#     if sheet[f'C{i+1}'].value == 1:
+#         print(sheet[f'D{i}'].value,len(list(set(data_stat)))/50)
+#         data_stat = []
+#         numx = 0
+
+###stat_kma###
+dict_index = {'AAC3':2,
+        'aadA24':1,
+        'CMY2':0,
+        'CTXM15':2,
+        'Ecoli':2,
+        'ErmT':0,
+        'KPC2':0,
+        'NDM5':0,
+        'OXA181':1,
+        'QnrS2':1,
+        'rmtB':0,
+        'SHV12':2,
+        'VANXA':0}
+for i in range(2, num + 1):
+    numx += 1
+    data1 = []
+    data1.append(sheet[f'F{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    data1.append(sheet[f'G{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    data1.append(sheet[f'H{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    data1.append(sheet[f'I{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    data1.append(sheet[f'J{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    data1.append(sheet[f'K{i}'].value.replace(' ', '').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]])
+    # print(data1)
+    str = sheet[f'E{i}'].value
+    for ix in data1:
+        if ix != 'None':
+            if str != ix:
+                data_stat.append(numx)
+    if sheet[f'C{i+1}'].value == 1:
+        print(sheet[f'D{i}'].value,len(list(set(data_stat)))/50)
+        data_stat = []
+        numx = 0
+
+
+###Paper####
+# for i in range(2,num+1):
+#     data.append(sheet[f'E{i}'].value)
+# new_data = list(set(data))
+# new_data.sort(key=data.index)
+# new_data1 = [val for val in new_data for i in range(15)]
+# print(new_data1)
+# numx = 0
+# for i in range(2,num+1):
+#     if sheet[f'E{i}'].value == sheet[f'F{i}'].value or sheet[f'E{i}'].value == sheet[f'L{i}'].value or sheet[f'E{i}'].value == sheet[f'R{i}'].value:
+#         data_pos.append('marker')
+#     else:
+#         data_neg.append('marker')
+#     if sheet[f'C{i}'].value != 50:
+#         pass
+#     else:
+#         length_pos = len(data_pos)
+#         print(sheet[f'E{i}'].value,length_pos)
+#         length_neg = len(data_neg)
+#         data_pos = []
+#         data_neg = []
+#         precent = length_pos/50
+#         filew.write('%s\t%s\n'%(new_data1[numx],precent))
+#         numx += 1
+#         print(numx)
+# #
+#
+#
+# ####KMA####
+# dict_index = {'AAC3':2,
+#         'aadA24':1,
+#         'CMY2':0,
+#         'CTXM15':2,
+#         'Ecoli':2,
+#         'ErmT':0,
+#         'KPC2':0,
+#         'NDM5':0,
+#         'OXA181':1,
+#         'QnrS2':1,
+#         'rmtB':0,
+#         'SHV12':2,
+#         'VANXA':0}
+# for i in range(2,num+1):
+#     if sheet[f'F{i}'].value != 'None':
+#         if sheet[f'E{i}'].value == sheet[f'F{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]]  or sheet[f'E{i}'].value == sheet[f'G{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]] or sheet[f'E{i}'].value == sheet[f'H{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]] or sheet[f'E{i}'].value == sheet[f'I{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]] or sheet[f'E{i}'].value == sheet[f'J{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]] or sheet[f'E{i}'].value == sheet[f'K{i}'].value.replace(' ','').split(':')[0].split('$')[dict_index[sheet[f'D{i}'].value]]:
+#             data_pos.append('marker')
+#         if sheet[f'C{i}'].value != 50:
+#             pass
+#         else:
+#             length_pos = len(data_pos)
+#             length_neg = len(data_neg)
+#             data_pos = []
+#             precent = length_pos/50
+#             filew.write('%s\n' % (precent))
+
+
+# str1 = 'ATGTCACTGTATCGCCGTCTAGTTCTGCTGTCTTGTCTCTCATGGCCGCTGGCTGGCTTTTCTGCCACCGCGCTGACCAACCTCGTCGCGGAACCATTCGCTAAACTCGAACAGGACTTTGGCGGCTCCATCGGTGTGTACGCGATGGATACCGGCTCAGGCGCAACTGTAAGTTACCGCGCTGAGGAGCGCTTCCCACTGTGCAGCTCATTCAAGGGCTTTCTTGCTGCCGCTGTGCTGGCTCGCAGCCAGCAGCAGGCCGGCTTGCTGGACACACCCATCCGTTACGGCAAAAATGCGCTGGTTCCGTGGTCACCCATCTCGGAAAAATATCTGACAACAGGCATGACGGTGGCGGAGCTGTCCGCGGCCGCCGTGCAATACAGTGATAACGCCGCCGCCAATTTGTTGCTGAAGGAGTTGGGCGGCCCGGCCGGGCTGACGGCCTTCATGCGCTCTATCGGCGATACCACGTTCCGTCTGGACCGCTGGGAGCTGGAGCTGAACTCCGCCATCCCAGGCGATGCGCGCGATACCTCATCGCCGCGCGCCGTGACGGAAAGCTTACAAAAACTGACACTGGGCTCTGCACTGGCTGCGCCGCAGCGGCAGCAGTTTGTTGATTGGCTAAAGGGAAACACGACCGGCAACCACCGCATCCGCGCGGCGGTGCCGGCAGACTGGGCAGTCGGAGACAAAACCGGAACCTGCGGAGTGTATGGCACGGCAAATGACTATGCCGTCGTCTGGCCCACTGGGCGCGCACCTATTGTGTTGGCCGTCTACACCCGGGCGCCTAACAAGGATGACAAGCACAGCGAGGCCGTCATCGCCGCTGCGGCTAGACTCGCGCTCGAGGGATTGGGCGTCAACGGGCAGTAA'
+# str2 = 'ATGTCACTGTATCGCCGTCTAGTTCTGCTGTCTTGTCTCTCATGGCCGCTGGCTGGCTTTTCTGCCACCGCGCTGACCAACCTCGTCGCGGAACCATTCGCTAAACTCGAACAGGACTTTGGCGGCTCCATCGGTGTGTACGCGATGGATACCGGCTCAGGCGCAACTGTAAGTTACCGCGCTGAGGAGCGCTTCCCACTGTGCAGCTCATTCAAGGGCTTTCTTGCTGCCGCTGTGCTGGCTCGCAGCCAGCAGCAGGCCGGCTTGCTGGACACACCCATCCGTTACGGCAAAAATGCGCTGGTTCCGTGGTCACCCATCTCGGAAAAATATCTGACAACAGGCATGACGGTGGCGGAGCTGTCCGCGGCCGCCGTGCAATACAGTGATAACGCCGCCGCCAATTTGTTGCTGAAGGAGTTGGGCGGCCCGGCCGGGCTGACGGCCTTCATGCGCTCTATCGGCGATACCACGTTCCGTCTGGACCGCTGGGAGCTGGAGCTGAACTCCGCCATCCCAGGCGATGCGCGCGATACCTCATCGCCGCGCGCCGTGACGGAAAGCTTACAAAAACTGACACTGGGCTCTGCACTGGCTGCGCCGCAGCGGCAGCAGTTTGTTGATTGGCTAAAGGGAAACACGACCGGCAACCACCGCATCCGCGCGGCGGTGCCGGCAGACTGGGCAGTCGGAGACAAAACCGGAACCTGCGGAGTGTATGGCACGGCAAATGACTATGCCGTCGTCTGGCCCACTGGGCGCGCACCTATTGTGTTGGCCGTCTACACCCGGGCGCCTAACAAGGATGACAAGTACAGCGAGGCCGTCATCGCCGCTGCGGCTAGACTCGCGCTCGAGGGATTGGGCGTCAACGGGCAGTAA'
+# for num in range(len(str1)):
+#     if str1[num] == str2[num]:
+#         pass
+#     else:
+#         print(str1[num],str2[num])
+# import re
+# filew = open('/data/Yixue/huzunkai/develop/02.Prejoct/08.feike_paper/00_1.Genome_New/02.feike/stat_Ecoli.xls','w')
+# for reads_num in range(1,16):
+#     num_all = 0
+#     for repeat in range(1,51):
+#         file = open(f'/data/Yixue/huzunkai/develop/02.Prejoct/08.feike_paper/00_1.Genome_New/02.feike/00.new_result1/00.geno_Ecoli/reads_{reads_num}/03.Arg2AST/CARD/result{repeat}/result{repeat}.stat.filter.xls','r')
+#         f = file.readline()
+#         f = file.readlines()
+#
+#         for i in f:
+#             i = i.replace('\n','')
+#             ii = re.split('\t',i)
+#             data = ii[18].split(',')
+#             num = 0
+#             for ix in data:
+#                 if ix[:3] == '239':
+#                     num += 1
+#                 else:
+#                     pass
+#             if num != 0:
+#                 num_all += 1
+#             else:
+#                 pass
+#     filew.write('%s\t%s\n'%(f'reads_{reads_num}',num_all/50))
